@@ -7,7 +7,9 @@ import Loader from "../components/TableLoader";
 
 const UsersTable: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { users, loading, error } = useAppSelector((state) => state.users);
+  const { users, loading, error, errorMessage } = useAppSelector(
+    (state) => state.users
+  );
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -17,7 +19,7 @@ const UsersTable: React.FC = () => {
     return <Loader />;
   }
   if (error) {
-    return <div>{error}</div>;
+    return <div>{errorMessage}</div>;
   }
 
   return <Table users={users} />;

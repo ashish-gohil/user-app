@@ -13,13 +13,17 @@ const UserData: React.FC = () => {
     dispatch(fetchUserById(userId || "dummy"));
   }, [dispatch, userId]);
 
-  const { user, loading, error } = useAppSelector((state) => ({
+  const { user, loading, error, errorMessage } = useAppSelector((state) => ({
     user: state?.users?.curUser,
     loading: state?.users?.loading,
     error: state?.users?.error,
+    errorMessage: state?.users?.errorMessage,
   }));
   if (error) {
-    return <div>Something went wrong!</div>;
+    <>
+      <div>Error Creating User!</div>
+      <div>{errorMessage}</div>
+    </>;
   }
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md">

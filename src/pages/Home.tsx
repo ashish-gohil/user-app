@@ -10,7 +10,11 @@ const Home: React.FC = () => {
     age: null,
   });
   const dispatch = useAppDispatch();
-  const userId = useAppSelector((state) => state?.users?.userId);
+  const { userId, error, errorMessage } = useAppSelector((state) => ({
+    userId: state?.users?.userId,
+    error: state?.users?.userId,
+    errorMessage: state?.users?.errorMessage,
+  }));
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +34,12 @@ const Home: React.FC = () => {
   if (userId && userId.length > 0) {
     console.log(userId);
     navigate(`/users/${userId}`);
+  }
+  if (error) {
+    <>
+      <div>Error Creating User!</div>
+      <div>{errorMessage}</div>
+    </>;
   }
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md">

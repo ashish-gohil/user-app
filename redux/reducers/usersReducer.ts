@@ -13,9 +13,10 @@ export interface User {
 interface UsersState {
   users: User[];
   loading: boolean;
-  error: string | null;
+  errorMessage: string | null;
   curUser: User | null;
   userId: string | null;
+  error: boolean;
 }
 
 interface UserRes {
@@ -27,8 +28,9 @@ const initialState: UsersState = {
   users: [],
   curUser: null,
   loading: false,
-  error: null,
+  errorMessage: null,
   userId: null,
+  error: false,
 };
 
 // Async thunk for fetching users
@@ -83,7 +85,6 @@ const usersSlice = createSlice({
     builder
       .addCase(fetchUsers.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
@@ -91,7 +92,8 @@ const usersSlice = createSlice({
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch users";
+        state.errorMessage = action.error.message || "Failed to fetch users";
+        state.error=true
       })
       .addCase(fetchUserById.fulfilled, (state, action) => {
         state.curUser = action.payload;
@@ -99,11 +101,11 @@ const usersSlice = createSlice({
       })
       .addCase(fetchUserById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch user";
+        state.errorMessage = action.error.message || "Failed to fetch user";
+        state.error=true
       })
       .addCase(fetchUserById.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(createUser.fulfilled, (state, action) => {
         state.userId = action.payload;
@@ -111,11 +113,11 @@ const usersSlice = createSlice({
       })
       .addCase(createUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch user";
+        state.errorMessage = action.error.message || "Failed to fetch user";
+        state.error=true
       })
       .addCase(createUser.pending, (state) => {
         state.loading = true;
-        state.error = null;
       });
   },
 });
