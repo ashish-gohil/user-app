@@ -3,7 +3,6 @@ import UserLoader from "../components/UserLoader";
 import { fetchUserById } from "../../redux/reducers/usersReducer";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useParams } from "react-router-dom";
-// import Loader from "./Loader";
 
 const UserData: React.FC = () => {
   const dispatch = useAppDispatch();

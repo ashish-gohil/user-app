@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const apiEndpoint = "http://localhost:3000/api";
+const apiEndpoint = process.env.API_ENDPOINT || "http://localhost:3000/api";
 
 export interface User {
   id: number | null;

@@ -9,10 +9,10 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Home from "./pages/home.tsx";
-import UsersTable from "./pages/usersTable.tsx";
-import UserData from "./pages/user.tsx";
 import Header from "./components/Header.tsx";
+import Home from "./pages/Home.tsx";
+import UsersTable from "./pages/UsersTable.tsx";
+import UserData from "./pages/User.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
